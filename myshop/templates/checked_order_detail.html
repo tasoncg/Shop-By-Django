@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block breadcrumb %}
+<li class='breadcrumb-item active'>Shop</li>
+{% endblock %}
+
+
+{% block content %}
+<table class='table'>
+	<thead class=thead-inverse>
+		<tr>
+			<th>ID</th>
+			<th>item</th>
+			<th>Price</th>
+			<th>Quantity</th>			
+			<th>Total</th>
+		</tr>		
+	</thead>
+	<tbody>
+		<tr>
+			<td>{{order.id}}</td>
+			<td>{{order.item.p_name}}</td>			
+			<td>{{order.item.price}}</td>
+			<td>{{order.qty}}</td>
+			<td>{{order.total}}</td>			
+		</tr>
+	</tbody>	
+</table>
+
+<table class='table'>
+	<thead class=thead-inverse>
+		<tr>
+			<th>Customer</th>
+			<th>Address</th>
+			<th>Email</th>
+			<th>Order Date</th>
+			<th>Checked</th>
+		</tr>
+	</thead> 
+	<tbody>
+		<tr>
+			<td>{{order.customer.c_name}}<br><small>{{order.customer.phone}}</small></td>
+			<td>{{order.customer.address}}</td>
+			<td>{{order.customer.email}}</td>
+			<td>{{order.order_date}}</td>
+			<td><a href="{% url 'checked_orders' %}" ><button>Checked</button></a></td>			
+		</tr>
+		
+	</tbody>
+	
+</table>
+
+
+{% endblock %}

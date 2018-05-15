@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block breadcrumb %}
+<li class='breadcrumb-item active'>Shop</li>
+{% endblock %}
+{% block content %}
+<table class='table'>
+	<thead class=thead-inverse>
+		<tr>
+			<th>ID</th>
+			<th>item</th>
+			<th>Quantity</th>
+			<th>Total</th>
+			<th>Customer</th>
+			<th>Date</th>
+			<th>Checked</th>
+		</tr>		
+	</thead>
+
+	<tbody>
+		{% for order in orders %}
+		<tr>
+			<td>{{order.id}}</td>
+			<td>{{order.item}}</td>
+			<td>{{order.qty}}</td>
+			<td>{{order.total}}</td>
+			<td>{{order.customer}}</td>
+			<td>{{order.order_date}}</td>
+						
+		</tr>
+
+		<tr>
+			<td>{{order.customer}}</td>
+			<td>{{order.customer.phone}}</td>
+			<td>{{order.customer.email}}</td>
+			<td>{{order.customer.address}}</td>
+			<td>
+				<!-- <a href="{% url 'order_detail' order.pk %}" ><button>Detail</button></a> -->	
+				
+					<!-- <input type="submit" name="checked" value='checked'> -->	
+					<a href="{% url 'order_detail' order.pk %}" ><button>Detail</button></a> 	
+									
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+	
+</table>
+
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block breadcrumb %}
+<li class='breadcrumb-item active'>Shop</li>
+{% endblock %}
+
+{% block content %}
+<table class='table'>
+	<thead class='thead-inverse'>
+		<tr>
+			<th>product</th>
+			<th>Price</th>
+			<th>Supplier</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for product in product %}
+		<tr>
+			<td>
+				{{ product.p_name }}<br>
+				<small class='text_muted d-block'>{{ product.description }}</small>
+			</td>
+			<td class='align-middle'><img src="{{ product.image.url }}" class='img-responsive' width="30%" height="30%"></td>
+			<td class='align-middle'>{{ product.supplier }}</td>
+			<td class='align-middle'><a href="{% url 'buy' product.pk %}"><button>Buy</button></a></td>
+		</tr>
+		{% endfor %}
+
+	</tbody>
+</table>
+<p>You have visited this page {{num_visits}} {% if num_visits == 1 %} time {% else %}times{% endif %}.</p>
+{% endblock %}

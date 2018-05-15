@@ -1,0 +1,114 @@
+
+
+
+{% extends 'base.html' %}
+
+{% block stylesheet %}
+
+{% endblock %}
+
+{% block body %}
+<div class="container">
+  <ol class="breadcrumb my-4">
+    <li class="breadcrumb-item active">Shop</li>
+  </ol>
+  <table class='table'>
+    <thead class='thead-inverse'>
+      <tr>
+        <th>Product</th>
+        <th>Image</th>
+        <th>Price</th>
+        <th>Supplier</th>
+        <th>Total</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          {{ buy.p_name }}<br>
+          <small class='text_muted d-block'>{{ buy.description }}</small>
+        </td>
+        <td><img src="{{ buy.image.url }}"  width="30%" height="30%"></td>
+        <td class='align-middle' id ='price'>{{buy.price}}</td>
+        <td class='align-middle'>{{ buy.supplier }}</td>
+        <td class='align-middle' id='total'>{{buy.price}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <form method='post'  id='qty_form'>
+            {% csrf_token %}
+            <!-- quantity -->
+
+            <!-- Thong tin khach hang ============= -->
+            <ul>
+              <li>
+                <label>Your name</label>
+                <input type="text"  name="c_name">
+              </li>
+              <li>
+                <label>Your phone</label>
+                <input type="text"  name="phone">
+              </li>
+              <li>
+                <label >Your email</label>
+                <input type="email" name="email">
+              </li>
+              <li>
+                <label>Your address</label>
+                <input type="text" name="address">
+              </li>
+              <li>
+                <input style="width: 30px;" type="text" name="qty" id='qty' value='1'>
+              </li>
+              <li>
+                <button type="button" style="width: 25px;" id='qty_inc' onclick="upQuantity()">+</button>
+                <button type="button" style="width: 25px;" id='qty_des' onclick="downQuantity()">-</button>
+                <button type='submit'>Buy</button>
+              </li>
+            </ul>
+            <style type="text/css">
+              ul li{
+                float: left;
+                margin-right: 10px;
+                list-style-type: none;
+              }
+            </style>
+            
+          </form>
+
+          
+</div>
+
+<!-- JS  ============================== --> 
+<script>
+  price = document.getElementById("price").textContent;
+  function upQuantity(){
+    number = document.getElementById("qty").value;
+    number = parseInt(number) +1;
+    $("#qty").val(number);
+
+  // $("#total").textContent= parseInt(qty)*parseInt(price);
+  total = parseInt(price)*number;
+  $("#total").text(total);  
+};
+
+function downQuantity(){
+  number = document.getElementById("qty").value;
+  if(number>1){
+    number = parseInt(number) -1;
+    $("#qty").val(number);
+    
+
+
+    total = parseInt(price)*number;
+    $("#total").text(total);
+  }  
+};
+
+// function submit_two_form(){
+//   document.getElementById("qty_form").submit();
+// };
+
+</script>
+{% endblock %}
